@@ -33,11 +33,11 @@ Can be an integer to determine the exact padding."
   :type '(choice integer boolean))
 
 ;;
-(def-doom-theme doom-homage-white
-  "A light theme inspired by Atom One"
+(def-doom-theme doom-sungarden
+  "A light theme, low contrast theme"
 
   ;; name        default   256       16
-  ((bg         '("#fafafa" nil       nil            ))
+  ((bg         '("#fafaf8" nil       nil            ))
    (bg-alt     '("#f0f0f0" nil       nil            ))
    (base0      '("#f0f0f0" "#f0f0f0" "white"        ))
    (base1      '("#e7e7e7" "#e7e7e7" "brightblack"  ))
@@ -53,7 +53,7 @@ Can be an integer to determine the exact padding."
 
    (grey       base5)
    (red        '("#e45649" "#e45649" "red"          ))
-   (orange     '("#8a3b3c" "#dd8844" "brightred"    ))
+   (orange     '("#7a3b5c" "#dd8844" "brightred"    ))
    (green      '("#556b2f" "#556b2f" "green"        ))
    (teal       '("#4db5bd" "#44b9b1" "brightgreen"  ))
    (yellow     '("#986801" "#986801" "yellow"       ))
@@ -65,35 +65,55 @@ Can be an integer to determine the exact padding."
    (cyan       '("#0184bc" "#0184bc" "brightcyan"   ))
    (dark-cyan  '("#005478" "#005478" "cyan"         ))
 
+   ;; Extra
+   (delimiter-3       '("#8ec07c" "#87af87"                 ))
+   (light3            '("#665c54" "#626262" "grey"          ))
+   (light4            '("#7c6f64" "#767676" "grey"          ))
+   (faded-red         '("#cc241d" "#d75f5f" "red"           ))
+   (faded-green       '("#98971a" "#afaf00" "green"         ))
+   (faded-yellow      '("#d79921" "#ffaf00" "yellow"        ))
+   (faded-blue        '("#458588" "#87afaf" "blue"          ))
+   (faded-orange      '("#d65d0e" "#ff8700" "brightorange"  ))
+   (faded-aqua        '("#689d6a" "#87af87" "brightcyan"    ))
+   (dark-green        '("#1E521E" "#004f00"                 ))
+   (dark-red          '("#421E1E" "#5f0000"                 ))
+   (dark-blue         '("#2B3C44" "#000087"                 ))
+   (dark-aqua         '("#36473A" "#005f5f"                 ))
+   (sienna            '("#dd6f48" "d7875f"                  ))
+   (lightblue4        '("#66999D" "#5fafaf" "brightblue"    ))
+   (burlywood4        '("#BBAA97" "#aafaf87"                ))
+   (aquamarine4       '("#83af98" "#87af87"                 ))
+   (turquoise4        '("#61ACBB" "#5fafaf" "brightblue"    ))
+
    ;; face categories -- required for all themes
    (highlight      blue)
    (vertical-bar   (doom-darken base2 0.1))
-   (selection      base3)
+   (selection      base1)
    (builtin        fg)
-   (comments       dark-blue)
-   (doc-comments   (doom-darken comments 0.15))
+   (comments       (doom-lighten grey 0.4))
+   (doc-comments   (doom-lighten grey 0.3))
    (constants      fg)
    (functions      blue)
-   (keywords       fg)
+   (keywords       dark-cyan)
    (methods        fg)
    (operators      fg)
    (type           fg)
-   (strings        orange)
+   (strings        green)
    (variables      fg)
    (numbers        orange)
-   (region         `(,(doom-darken (car bg-alt) 0.1) ,@(doom-darken (cdr base0) 0.3)))
-   (error          red)
+   (region         `(,(doom-darken (car bg-alt) 0.05) ,@(doom-darken (cdr base0) 0.1)))
+   (error          dark-red)
    (warning        yellow)
    (success        green)
-   (vc-modified    orange)
-   (vc-added       green)
-   (vc-deleted     red)
+   (vc-modified    faded-orange)
+   (vc-added       faded-green)
+   (vc-deleted     dark-red)
 
    ;; custom categories
    (-modeline-bright t)
    (-modeline-pad
-    (when doom-homage-white-padded-modeline
-      (if (integerp doom-homage-white-padded-modeline) doom-homage-white-padded-modeline 4)))
+    (when doom-sungarden-padded-modeline
+      (if (integerp doom-sungarden-padded-modeline) doom-sungarden-padded-modeline 2)))
 
    (modeline-fg     nil)
    (modeline-fg-alt (doom-blend violet base4 (if -modeline-bright 0.5 0.2)))
@@ -122,7 +142,7 @@ Can be an integer to determine the exact padding."
    ((line-number-current-line &override) :foreground base8)
 
    ;; Override secondary selection
-   ((secondary-selection &override) :background base0)
+   ((secondary-selection &override) :background base2)
 
    ;; Change swiper colours, background and foreground are too close
    ((swiper-match-face-1 &override) :foreground bg :background fg)
@@ -146,6 +166,7 @@ Can be an integer to determine the exact padding."
    (mode-line-emphasis
     :foreground (if -modeline-bright base8 highlight))
 
+   (solaire-hl-line-face    :background nil :foreground nil)
    (solaire-mode-line-face
     :inherit 'mode-line
     :background modeline-bg-l
@@ -167,6 +188,23 @@ Can be an integer to determine the exact padding."
    (css-proprietary-property :foreground orange)
    (css-property             :foreground green)
    (css-selector             :foreground blue)
+
+   ;; js2
+   (js2-warning                    :underline `(:style wave :color ,yellow))
+   (js2-error                      :underline `(:style wave :color ,red))
+   (js2-external-variable          :underline `(:style wave :color ,cyan))
+   (js2-jsdoc-tag                  :background nil :foreground grey  )
+   (js2-jsdoc-type                 :background nil :foreground light4)
+   (js2-jsdoc-value                :background nil :foreground light3)
+   (js2-function-param             :background nil :foreground cyan)
+   (js2-function-call              :background nil :foreground blue)
+   (js2-instance-member            :background nil :foreground orange)
+   (js2-private-member             :background nil :foreground yellow)
+   (js2-private-function-call      :background nil :foreground faded-aqua)
+   (js2-jsdoc-html-tag-name        :background nil :foreground light4)
+   (js2-jsdoc-html-tag-delimiter   :background nil :foreground light3)
+   (js2-instance-member            :background nil :foreground blue)
+   (js2-object-property            :background nil :foreground blue)
 
    ;; markdown-mode
    (markdown-markup-face     :foreground base5)
@@ -219,6 +257,13 @@ Can be an integer to determine the exact padding."
 
    ;; web-mode
    (web-mode-current-element-highlight-face :background dark-blue :foreground bg)
+   (web-mode-html-tag-face :foreground dark-green)
+   (web-mode-keyword-face :foreground "#402478")
+
+   ;; paren-match
+   (show-paren-match :foreground "#369429" :background "#ffffff")
+   (show-paren-mismatch :foreground "#f0f0f0" :background "#b43629")
+   (rainbow-delimiters-unmatched-face :foreground "#f0f0f0" :background "#b43629")
 
    ;; wgrep
    (wgrep-face :background base1)
